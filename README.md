@@ -18,6 +18,8 @@ cd ..
 sudo docker-compose -f docker-compose.yml up
 ```
 
+🚀 Server ready at http://localhost:3000
+
 # Local network Linux
 
 ```bash
