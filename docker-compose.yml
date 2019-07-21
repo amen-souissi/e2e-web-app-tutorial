@@ -1,0 +1,49 @@
+version: "2"
+services:
+  front:
+    container_name: front
+    image: front:dev
+    build: ./front
+    restart: always
+    ports:
+      - $HOST:3000:3000
+    environment:
+      - REACT_APP_BFF_URL=$BFF_URL
+      - REACT_APP_WS_BFF_URL=$WS_BFF_URL
+      - NODE_ENV
+    volumes:
+      - ./front:/root/project/front
+
+  bff:
+    container_name: bff
+    image: bff:dev
+    build: ./bff
+    restart: always
+    ports:
+      - $HOST:4000:4000
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - DATABASE_URL
+      - NODE_ENV
+    volumes:
+      - ./bff:/root/project/bff
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: db
+    image: postgres:11.3
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - ./db/postgres/init:/docker-entrypoint-initdb.d/
+      - ./db/postgres/data:/var/lib/postgresql/data
+    restart: always

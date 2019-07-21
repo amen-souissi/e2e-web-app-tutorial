@@ -1,0 +1,8 @@
+# bff
+bff/node_modules/
+
+# front
+front/node_modules/
+
+# bd
+db/postgres/data/*
