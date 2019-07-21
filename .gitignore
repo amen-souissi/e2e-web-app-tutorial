@@ -5,5 +5,4 @@ bff/node_modules/
 front/node_modules/
 
 # bd
-db/postgres/data/*
-!db/postgres/data/.gitkeep
+db/postgres/data/
