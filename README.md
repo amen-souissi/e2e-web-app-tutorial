@@ -11,9 +11,9 @@ sudo setenforce 0
 ```bash
 sudo docker-compose build
 cd bff
-npm install
+npm ci
 cd ../front
-npm install
+npm ci
 sudo docker-compose -f docker-compose.yml up
 ```
 
