@@ -14,6 +14,7 @@ cd bff
 npm ci
 cd ../front
 npm ci
+cd ..
 sudo docker-compose -f docker-compose.yml up
 ```
 
