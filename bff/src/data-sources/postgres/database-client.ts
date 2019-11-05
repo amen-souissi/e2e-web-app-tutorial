@@ -26,17 +26,6 @@ class PgDatabaseClient implements IDatabaseClient {
     const values = [channelId, comment];
     return database.one(query, values).then(res => res);
   }
-  checkPassword(userName: string, password: string): boolean {
-    return true;
-  }
-
-  getUser(userId: string): any {
-    return { id: userId, name: "Amen" };
-  }
-
-  getUserByUsername(userName: string): any {
-    return { id: "1", name: "Amen" };
-  }
 }
 
 export default new PgDatabaseClient();

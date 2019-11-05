@@ -1,7 +1,6 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import { ApolloProvider } from "react-apollo";
-import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
+import { ApolloProvider } from "@apollo/react-hooks";
 import { Provider as ReduxProvider } from "react-redux";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Router } from "react-router-dom";
@@ -21,13 +20,11 @@ export const history = createBrowserHistory();
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
-    <ApolloHooksProvider client={apolloClient}>
       <ReduxProvider store={store}>
         <MuiThemeProvider theme={defaultTheme}>
           <Router history={history}>{routes}</Router>
         </MuiThemeProvider>
       </ReduxProvider>
-    </ApolloHooksProvider>
   </ApolloProvider>,
   document.getElementById("root")
 );

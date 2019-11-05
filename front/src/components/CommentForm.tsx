@@ -1,6 +1,6 @@
 import * as React from "react";
 import { I18n } from "react-redux-i18n";
-import { useMutation } from "react-apollo-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { TextField, InputAdornment, IconButton } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const CommentForm = ({ channelId }: Props) => {
-  const addComment = useMutation<{}, MutationVariables>(AddComment);
+  const [addComment, {loading}] = useMutation<{}, MutationVariables>(AddComment);
   const [comment, updateComment] = React.useState<string>("");
 
   const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +28,7 @@ const CommentForm = ({ channelId }: Props) => {
   return (
     <TextField
       fullWidth
+      disabled={loading}
       placeholder={I18n.t("channels.comment")}
       margin="normal"
       variant="outlined"

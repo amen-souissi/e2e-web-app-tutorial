@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery } from "react-apollo-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { I18n } from "react-redux-i18n";
 import { connect } from "react-redux";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
