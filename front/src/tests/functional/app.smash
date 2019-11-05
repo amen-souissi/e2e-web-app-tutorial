@@ -1,18 +1,31 @@
-* A message
-    {message} = 'Salut !'   // you can use any variable name, not just {message}
+* Navigate to the site 
+    Navigate to  'http://localhost:3000'
+
+* For each message
+    {message} = 'Salut !'
     {message} = 'IT-Communities'
     {message} = 'GG'
 
-Open Chrome 
-    Navigate to 'http://localhost:3000'
-        Click 'div[data-testid=channel-item-1]'
-            {message} = A message
-                Type {message} into 'input[placeholder="Send a message"]'
-                    Click 'button[data-testid=send-message]'
-                        Contains {message} in 'div[data-testid=comments-list]'
+* Open channel {{channelId}} 
+    Click 'div[data-testid=channel-item-{{channelId}}]'
+
 
 * Contains {text} in {element} {
     const match = element.includes(text);
     return match;
 }
+
+* Send the message {{message}}
+    Type {{message}} into 'input[placeholder="Send a message"]'
+        Click 'button[data-testid=send-message]'
+
+* Channel has the message {{message}}
+    Contains {{message}} in 'div[data-testid=comments-list]'
+
+Open Chrome 
+    Navigate to the site
+        Open channel '1'
+            {message} = For each message
+                Send the message {message}
+                    Channel has the message {message}
 
