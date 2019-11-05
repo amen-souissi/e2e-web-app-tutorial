@@ -59,7 +59,7 @@ function FlatList<Item = any, ItemProps = Item>({
   if (!items) {
     return (
       <div className={classes.progress}>
-        <CircularProgress disableShrink size={30} />
+        <CircularProgress data-testid="progress" disableShrink size={30} />
       </div>
     );
   }

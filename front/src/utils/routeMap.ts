@@ -1,4 +1,6 @@
-import { history } from "..";
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();
 
 interface Object {
   [key: string]: string | number | boolean;

@@ -67,19 +67,20 @@ export interface ChannelItemProps extends ChannelFragment {
 
 interface Props extends ChannelItemProps, WithStyles<typeof styles> {}
 
-class ChannelItem extends React.PureComponent<Props> {
-  open = () => {
+export class DumbChannelItem extends React.PureComponent<Props> {
+  private open = () => {
     const { id } = this.props;
     goTo(getRoute("messages", { channelId: id }));
   };
 
-  render() {
-    const { title, isActive, classes } = this.props;
+  public render() {
+    const { id, title, isActive, classes } = this.props;
     return (
       <ListItem
         dense
         button
         ContainerComponent="div"
+        data-testid={`channel-item-${id}`}
         classes={{
           root: classNames(classes.listItem, {
             [classes.listItemActive]: isActive
@@ -107,4 +108,4 @@ class ChannelItem extends React.PureComponent<Props> {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(ChannelItem);
+export default withStyles(styles, { withTheme: true })(DumbChannelItem);
