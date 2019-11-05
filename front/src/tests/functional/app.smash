@@ -1,13 +1,18 @@
-Open Chrome ..
+* A message
+    {message} = 'Salut !'   // you can use any variable name, not just {message}
+    {message} = 'IT-Communities'
+    {message} = 'GG'
+
+Open Chrome 
     Navigate to 'http://localhost:3000'
-    Click 'div[data-testid=channel-item-1]'
-    Type 'My Test' into 'input[placeholder="Send a message"]'
-    Click 'button[data-testid=send-message]'
-    Contains 'My Test' in 'div[data-testid=comments-list]'
+        Click 'div[data-testid=channel-item-1]'
+            {message} = A message
+                Type {message} into 'input[placeholder="Send a message"]'
+                    Click 'button[data-testid=send-message]'
+                        Contains {message} in 'div[data-testid=comments-list]'
 
 * Contains {text} in {element} {
     const match = element.includes(text);
     return match;
-
 }
 
