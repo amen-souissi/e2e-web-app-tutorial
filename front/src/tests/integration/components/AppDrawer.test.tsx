@@ -32,14 +32,11 @@ describe("AppDrawer integration tests", () => {
         <AppDrawer />
       </MockedProvider>
     );
-    // loading data
+    // loading started
     expect(queryByTestId("progress")).toBeDefined();
     // wait for response (Foo is defined)
     await wait(() => getByText(/Foo/g));
     // loading ended
     expect(queryByTestId("progress")).toBeNull();
-    // open the channel
-    // fireEvent.click(getByText(/Foo/g))
-    // mock navigation
   });
 });

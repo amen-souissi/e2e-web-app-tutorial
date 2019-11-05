@@ -21,10 +21,7 @@ describe("ChannelItem component", () => {
   });
 
   test("should call goTo with the foo channel url on open", () => {
-    const props = {
-      id: "foo",
-      title: "Foo"
-    };
+    const props = { id: "foo", title: "Foo" };
     const wrapper = mount(withThemeProvider(() => <ChannelItem {...props} />));
     const instance = wrapper
       .find(DumbChannelItem)
