@@ -6,7 +6,7 @@
     {message} = 'IT-Communities'
     {message} = 'GG'
 
-* Open channel {{channelId}} 
+* Open the channel {{channelId}} 
     Click 'div[data-testid=channel-item-{{channelId}}]'
 
 
@@ -24,7 +24,7 @@
 
 Open Chrome 
     Navigate to the site
-        Open channel '1'
+        Open the channel '1'
             {message} = For each message
                 Send the message {message}
                     Channel has the message {message}
