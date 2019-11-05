@@ -3,6 +3,7 @@ bff/node_modules/
 
 # front
 front/node_modules/
+front/src/tests/functional/smashtest
 
 # bd
 db/postgres/data/

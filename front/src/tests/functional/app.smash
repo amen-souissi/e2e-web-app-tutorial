@@ -1,0 +1,13 @@
+Open Chrome ..
+    Navigate to 'http://localhost:3000'
+    Click 'div[data-testid=channel-item-1]'
+    Type 'My Test' into 'input[placeholder="Send a message"]'
+    Click 'button[data-testid=send-message]'
+    Contains 'My Test' in 'div[data-testid=comments-list]'
+
+* Contains {text} in {element} {
+    const match = element.includes(text);
+    return match;
+
+}
+

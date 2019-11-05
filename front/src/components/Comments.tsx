@@ -52,7 +52,12 @@ const Comments = ({ channelId }: Props) => {
       {({ subscribeToMore, data }) => {
         return (
           <Grid className={classes.container} container>
-            <Grid className={classes.comments} item xs={12}>
+            <Grid
+              data-testid="comments-list"
+              className={classes.comments}
+              item
+              xs={12}
+            >
               <FlatList<CommentItemFragment>
                 reverted
                 className={classes.list}

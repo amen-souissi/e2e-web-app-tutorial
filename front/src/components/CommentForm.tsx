@@ -11,7 +11,9 @@ interface Props {
 }
 
 const CommentForm = ({ channelId }: Props) => {
-  const [addComment, {loading}] = useMutation<{}, MutationVariables>(AddComment);
+  const [addComment, { loading }] = useMutation<{}, MutationVariables>(
+    AddComment
+  );
   const [comment, updateComment] = React.useState<string>("");
 
   const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +43,12 @@ const CommentForm = ({ channelId }: Props) => {
         autoFocus: true,
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton disabled={!comment} edge="end" onClick={sendComment}>
+            <IconButton
+              data-testid="send-message"
+              disabled={!comment}
+              edge="end"
+              onClick={sendComment}
+            >
               <SendIcon />
             </IconButton>
           </InputAdornment>
