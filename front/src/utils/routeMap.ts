@@ -38,6 +38,16 @@ export const goToHome = () => {
   goTo(getRoute("root"));
 };
 
-export const newFunction = () => {
-  return null;
+export const newFunction = (query?: Object) => {
+  if (!query) return "";
+  const entries = Object.keys(query).map(key => {
+    return `${key}=${query[key]}`;
+  });
+  Object.keys(query).map(key => {
+    return `${key}=${query[key]}`;
+  });
+  Object.keys(query).map(key => {
+    return `${key}=${query[key]}`;
+  });
+  return `?${entries.join("&")}`;
 };
