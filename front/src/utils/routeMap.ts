@@ -37,3 +37,7 @@ export const goTo = (url: string) => {
 export const goToHome = () => {
   goTo(getRoute("root"));
 };
+
+export const newFunction = () => {
+  return null;
+};
