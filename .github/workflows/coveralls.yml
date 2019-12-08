@@ -13,7 +13,7 @@ jobs:
       working-directory: ./front
       run: |
         npm ci
-        npm run test -- --coverage
+        npm run test -- --watchAll=false --coverage
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
