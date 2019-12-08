@@ -12,6 +12,7 @@ import defaultTheme from "./theme";
 import routes from "./routes";
 import { history } from "./utils/routeMap";
 
+// create the redux store
 const store = createAppStore();
 
 const apolloClient = getApolloClient();
