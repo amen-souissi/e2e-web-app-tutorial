@@ -3,14 +3,27 @@ import { toIdValue, getMainDefinition } from "apollo-utilities";
 import { ApolloLink, concat, split } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import { WebSocketLink } from "apollo-link-ws";
-import { InMemoryCache, IdGetterObj } from "apollo-cache-inmemory";
+import {
+  InMemoryCache,
+  IdGetterObj,
+  IntrospectionFragmentMatcher
+} from "apollo-cache-inmemory";
+
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData: {
+    __schema: {
+      types: []
+    }
+  }
+});
 
 const dataIdFromObject = (getterObj: IdGetterObj): string => {
-  return getterObj.id || "";
+  return `${getterObj.id || ""}-${getterObj.__typename}`;
 };
 
 const cache = new InMemoryCache({
-  dataIdFromObject: dataIdFromObject,
+  dataIdFromObject,
+  fragmentMatcher,
   cacheRedirects: {
     Query: {
       node: (_, args) => {
@@ -37,7 +50,10 @@ export default function getApolloClient() {
     // split based on operation type
     ({ query }) => {
       const definition = getMainDefinition(query);
-      return definition.kind === "OperationDefinition" && definition.operation === "subscription";
+      return (
+        definition.kind === "OperationDefinition" &&
+        definition.operation === "subscription"
+      );
     },
     wsLink,
     httpLink

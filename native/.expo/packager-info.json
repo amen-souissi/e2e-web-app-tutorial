@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 17677,
+  "expoServerNgrokUrl": "https://c2-i5u.amens.native.exp.direct",
+  "packagerNgrokUrl": "https://packager.c2-i5u.amens.native.exp.direct",
+  "ngrokPid": 17705,
+  "webpackServerPort": null
+}

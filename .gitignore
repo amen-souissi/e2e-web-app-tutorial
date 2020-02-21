@@ -5,5 +5,8 @@ bff/node_modules/
 front/node_modules/
 front/src/tests/functional/smashtest
 
+# native
+native/node_modules/
+
 # bd
 db/postgres/data/
