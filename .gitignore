@@ -7,6 +7,7 @@ front/src/tests/functional/smashtest
 
 # native
 native/node_modules/
+native/.expo/
 
 # bd
 db/postgres/data/

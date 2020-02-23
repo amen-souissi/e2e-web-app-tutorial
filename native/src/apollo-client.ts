@@ -4,6 +4,9 @@ import { ApolloLink, concat, split } from "apollo-link";
 import { createHttpLink } from "apollo-link-http";
 import { WebSocketLink } from "apollo-link-ws";
 import { InMemoryCache, IdGetterObj, IntrospectionFragmentMatcher } from "apollo-cache-inmemory";
+// import { AsyncStorage } from "react-native";
+// import { persistCache } from "apollo-cache-persist";
+
 import { REACT_APP_BFF_URL, REACT_APP_WS_BFF_URL } from "./constants";
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -30,7 +33,14 @@ const cache = new InMemoryCache({
   }
 });
 
+// await persistCache({
+//   cache,
+//   storage: AsyncStorage
+// });
+
 export default function getApolloClient() {
+  // await before instantiating ApolloClient, else queries might run before the cache is persisted
+
   // use the gql bff url
   const httpLink = createHttpLink({
     uri: `${REACT_APP_BFF_URL}/graphql`

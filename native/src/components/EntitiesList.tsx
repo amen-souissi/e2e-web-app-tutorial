@@ -24,7 +24,7 @@ function EntitiesList<Data = any, Node = any>({
     if (onMount) {
       onMount();
     }
-  }, [onMount]);
+  }, []);
 
   const entities = getEntities(data);
   if (!data || networkStatus === 1 || networkStatus === 2) {
@@ -38,11 +38,7 @@ function EntitiesList<Data = any, Node = any>({
     <View style={styles.container}>
       {entities && entities.length > 0 ? (
         <AnimatedFlatList
-          ListHeaderComponent={() => <View style={styles.header} />}
           data={entities}
-          disableVirtualization={false}
-          refreshing={networkStatus === 4}
-          onEndReachedThreshold={0.6}
           keyExtractor={item => item.id}
           renderItem={({ item }) => <ListItem node={item} />}
           ListFooterComponent={() => (

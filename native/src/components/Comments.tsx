@@ -1,4 +1,5 @@
 import React from "react";
+import { RouteProp } from "@react-navigation/native";
 import { useQuery } from "@apollo/react-hooks";
 
 import CommentsQuery, {
@@ -9,12 +10,17 @@ import CommentsQuery, {
 import { CommentFragment } from "../graphql/fragments/Comment";
 import CommentItem from "./CommentItem";
 import EntitiesList from "./EntitiesList";
+import { RootStackParamList } from "./Routes";
+import CommentForm from "./forms/CommentForm";
+
+export type CommentsScreenRouteProp = RouteProp<RootStackParamList, "Comments">;
 
 interface IProps {
-  channelId: string;
+  route: CommentsScreenRouteProp;
 }
 
-const Comments = ({ channelId }: IProps) => {
+const Comments = ({ route }: IProps) => {
+  const { channelId } = route.params;
   const { subscribeToMore, data, networkStatus } = useQuery<QueryData, QueryVariables>(CommentsQuery, {
     notifyOnNetworkStatusChange: true,
     fetchPolicy: "cache-and-network",
@@ -22,14 +28,17 @@ const Comments = ({ channelId }: IProps) => {
   });
 
   return (
-    <EntitiesList<QueryData, CommentFragment>
-      onMount={getSubscribeToNewComments(subscribeToMore, channelId)}
-      inverted
-      networkStatus={networkStatus}
-      data={data}
-      getEntities={entities => (entities ? entities.comments : [])}
-      ListItem={CommentItem}
-    />
+    <React.Fragment>
+      <EntitiesList<QueryData, CommentFragment>
+        onMount={getSubscribeToNewComments(subscribeToMore, channelId)}
+        inverted
+        networkStatus={networkStatus}
+        data={data}
+        getEntities={entities => (entities ? entities.comments : [])}
+        ListItem={CommentItem}
+      />
+      <CommentForm channelId={channelId} />
+    </React.Fragment>
   );
 };
 

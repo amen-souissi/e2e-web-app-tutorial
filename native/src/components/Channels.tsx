@@ -1,6 +1,6 @@
 import React from "react";
+import { StyleSheet, View } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
-import { StyleSheet, ScrollView } from "react-native";
 
 import ChannelsQuery, { Query as QueryData } from "../graphql/queries/Channels";
 import { ChannelFragment } from "../graphql/fragments/Channel";
@@ -14,21 +14,22 @@ const Channels = () => {
   });
 
   return (
-    <ScrollView scrollsToTop={false} style={styles.menu}>
+    <View style={styles.menu}>
       <EntitiesList<QueryData, ChannelFragment>
         networkStatus={networkStatus}
         data={data}
         getEntities={entities => (entities ? entities.channels : [])}
         ListItem={ChannelItem}
       />
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
-    backgroundColor: "white"
+    paddingTop: 15,
+    backgroundColor: "#4D394B"
   }
 });
 

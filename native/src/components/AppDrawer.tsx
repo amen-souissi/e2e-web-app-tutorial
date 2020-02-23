@@ -1,18 +1,14 @@
 import React from "react";
-import { Drawer, Container } from "native-base";
+import { Drawer } from "native-base";
 
 import Channels from "../components/Channels";
-import AppHeader from "./AppHeader";
-import AppMain from "./AppMain";
-
-interface IDrawerContext {
-  closeDrawer?: () => void;
-  openDrawer?: () => void;
-}
-
-export const DrawerContext = React.createContext<IDrawerContext>({});
+import Routes from "./Routes";
+import { DrawerContext } from "../contexts";
 
 export default function AppDrawer() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const close = () => setIsOpen(false);
+  const open = () => setIsOpen(true);
   const drawer = React.useRef(null);
 
   const closeDrawer = () => {
@@ -24,12 +20,18 @@ export default function AppDrawer() {
   };
 
   return (
-    <DrawerContext.Provider value={{ closeDrawer, openDrawer }}>
-      <Drawer ref={drawer} content={<Channels />} styles={styles}>
-        <Container>
-          <AppHeader openDrawer={openDrawer} />
-          <AppMain />
-        </Container>
+    <DrawerContext.Provider value={{ closeDrawer, openDrawer, isOpen }}>
+      <Drawer
+        ref={drawer}
+        content={<Channels />}
+        styles={styles}
+        onClose={close}
+        onOpen={open}
+        tweenHandler={ratio => ({
+          main: { opacity: (2 - ratio) / 2 }
+        })}
+      >
+        <Routes />
       </Drawer>
     </DrawerContext.Provider>
   );

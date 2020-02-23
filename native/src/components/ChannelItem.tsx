@@ -1,29 +1,42 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { Button, Text } from "native-base";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { Text } from "native-base";
 
-import { updateCurrentChannel } from "../redux/actions";
-import { DrawerContext } from "./AppDrawer";
 import { ChannelFragment } from "../graphql/fragments/Channel";
+import useNavigation from "../hooks/useNavigation";
+import { DrawerContext } from "../contexts";
 
 interface IProps {
   node: ChannelFragment;
 }
 
 const ChannelItem = ({ node: { id, title } }: IProps) => {
-  const dispatch = useDispatch();
+  const { navigation, route } = useNavigation("Comments");
   const { closeDrawer } = React.useContext(DrawerContext);
+  const isCurrent = route?.params?.channelId === id;
 
   const onclick = () => {
-    dispatch(updateCurrentChannel(id));
+    navigation.navigate("Comments", { channelId: id, channelTitle: title });
     closeDrawer();
   };
 
+  const textStyle = React.useMemo(() => [styles.title, isCurrent && styles.active], [isCurrent]);
+
   return (
-    <Button transparent onPress={onclick}>
-      <Text>{title}</Text>
-    </Button>
+    <TouchableOpacity onPress={onclick}>
+      <Text style={textStyle}>{title}</Text>
+    </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    padding: 10,
+    color: "white"
+  },
+  active: {
+    backgroundColor: "#4C9689"
+  }
+});
 
 export default ChannelItem;
