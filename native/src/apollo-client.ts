@@ -7,7 +7,11 @@ import { InMemoryCache, IdGetterObj, IntrospectionFragmentMatcher } from "apollo
 // import { AsyncStorage } from "react-native";
 // import { persistCache } from "apollo-cache-persist";
 
-import { REACT_APP_BFF_URL, REACT_APP_WS_BFF_URL } from "./constants";
+import getEnvVars from "../environment";
+
+const { apiUrl, wsApiUrl } = getEnvVars();
+
+console.log(apiUrl, wsApiUrl);
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData: {
@@ -43,11 +47,11 @@ export default function getApolloClient() {
 
   // use the gql bff url
   const httpLink = createHttpLink({
-    uri: `${REACT_APP_BFF_URL}/graphql`
+    uri: `${apiUrl}/graphql`
   });
 
   const wsLink = new WebSocketLink({
-    uri: `${REACT_APP_WS_BFF_URL}/graphql`,
+    uri: `${wsApiUrl}/graphql`,
     options: {
       reconnect: true
     }
