@@ -1,7 +1,3 @@
-import { createBrowserHistory } from "history";
-
-export const history = createBrowserHistory();
-
 interface Object {
   [key: string]: string | number | boolean;
 }
@@ -11,16 +7,16 @@ interface Routes {
 }
 
 const routes: Routes = {
-  root: () => "",
-  messages: args => `messages/${args.channelId}`
+  root: () => '',
+  messages: (args) => `messages/${args.channelId}`,
 };
 
 export const getQuery = (query?: Object) => {
-  if (!query) return "";
-  const entries = Object.keys(query).map(key => {
+  if (!query) return '';
+  const entries = Object.keys(query).map((key) => {
     return `${key}=${query[key]}`;
   });
-  return `?${entries.join("&")}`;
+  return `?${entries.join('&')}`;
 };
 
 export const getRoute = (name: string, args: Object = {}, query?: Object) => {
@@ -28,12 +24,4 @@ export const getRoute = (name: string, args: Object = {}, query?: Object) => {
     throw Error(`${name} is not a valid path!`);
   }
   return `/${routes[name](args)}${getQuery(query)}`;
-};
-
-export const goTo = (url: string) => {
-  history.push(url);
-};
-
-export const goToHome = () => {
-  goTo(getRoute("root"));
 };

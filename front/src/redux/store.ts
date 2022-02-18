@@ -1,15 +1,15 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose } from 'redux';
 import {
   loadTranslations,
   setLocale,
-  syncTranslationWithStore
-} from "react-redux-i18n";
+  syncTranslationWithStore,
+} from 'react-redux-i18n';
 
-import reducers from "./reducers";
-import middlewares from "./middlewares";
-import { getLocale, getTranslations } from "../utils/i18n";
-import { DEFAULT_LOCALE } from "../constants";
-import { Store } from "./reducers";
+import reducers from './reducers';
+import middlewares from './middlewares';
+import { getLocale, getTranslations } from '../utils/i18n';
+import { DEFAULT_LOCALE } from '../constants';
+import { Store } from './reducers';
 
 export default function createAppStore(initialState: Store = {}) {
   const store = createStore(
@@ -19,7 +19,7 @@ export default function createAppStore(initialState: Store = {}) {
   );
   syncTranslationWithStore(store);
   const userLocale =
-    localStorage.getItem("locale") ||
+    localStorage.getItem('locale') ||
     getLocale(navigator.language) ||
     DEFAULT_LOCALE;
   //@ts-ignore Property 'type' is missing in type 'DispatchCallback<any>'

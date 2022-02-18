@@ -1,4 +1,4 @@
-import * as actionTypes from "./actionTypes";
+import * as actionTypes from './actionTypes';
 
 export interface UpdateCurrentChannel {
   type: actionTypes.UPDATE_CURRENT_CHANNEL;
@@ -10,7 +10,7 @@ export const updateCurrentChannel = (
 ): UpdateCurrentChannel => {
   return {
     type: actionTypes.UPDATE_CURRENT_CHANNEL,
-    channelId: channelId || null
+    channelId: channelId || null,
   };
 };
 

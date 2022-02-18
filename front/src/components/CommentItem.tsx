@@ -1,7 +1,7 @@
-import React from "react";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-import { CommentFragment } from "../graphql/fragments/Comment";
+import { CommentFragment } from '../graphql/fragments/Comment';
 
 const useStyles = makeStyles(
   createStyles({
@@ -9,15 +9,15 @@ const useStyles = makeStyles(
       paddingTop: 8,
       paddingBottom: 8,
       paddingLeft: 15,
-      display: "flex",
-      "&:hover": {
-        backgroundColor: "rgba(14, 4, 4, 0.05)"
-      }
-    }
+      display: 'flex',
+      '&:hover': {
+        backgroundColor: 'rgba(14, 4, 4, 0.05)',
+      },
+    },
   })
 );
 
-export interface Props extends CommentFragment {}
+export type Props = CommentFragment;
 
 const CommentItem = ({ text }: Props) => {
   const classes = useStyles();
@@ -25,7 +25,8 @@ const CommentItem = ({ text }: Props) => {
     <div
       className={classes.container}
       dangerouslySetInnerHTML={{
-        __html: text
+        // warning
+        __html: text,
       }}
     />
   );

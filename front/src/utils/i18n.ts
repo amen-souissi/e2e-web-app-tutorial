@@ -1,15 +1,15 @@
-import { I18n } from "react-redux-i18n";
+import { I18n } from 'react-redux-i18n';
 
-import translations from "./translations";
+import translations from './translations';
 
-import { DEFAULT_LOCALE } from "../constants";
+import { DEFAULT_LOCALE } from '../constants';
 
-const myHandleMissingTranslation = function(
+const myHandleMissingTranslation = function (
   key: string,
   replacements: { count: number }
 ) {
   // We need to use a function, not a arrow function here to be able to use 'this'.
-  let translation = "";
+  let translation = '';
   // @ts-ignore
   const self = this;
   try {
@@ -33,10 +33,10 @@ export const getTranslations = () => {
 
 export const getLocale = (sourceLocale: string) => {
   let locale: string;
-  if (sourceLocale === "zh" || sourceLocale === "zh-CN") {
-    locale = "zh_CN";
+  if (sourceLocale === 'zh' || sourceLocale === 'zh-CN') {
+    locale = 'zh_CN';
   } else {
-    locale = sourceLocale.split("-")[0].toLowerCase();
+    locale = sourceLocale.split('-')[0].toLowerCase();
   }
   if (!translations[locale]) {
     locale = DEFAULT_LOCALE;

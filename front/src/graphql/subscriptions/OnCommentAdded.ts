@@ -1,6 +1,6 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import Comment from "../fragments/Comment";
+import Comment from '../fragments/Comment';
 
 export default gql`
   subscription OnCommentAdded($channelId: ID!) {

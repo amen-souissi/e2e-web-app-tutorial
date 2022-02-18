@@ -1,29 +1,29 @@
-import React, { ComponentType } from "react";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import * as React from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(
   createStyles({
     progress: {
-      position: "relative",
-      textAlign: "center",
-      padding: 20
+      position: 'relative',
+      textAlign: 'center',
+      padding: 20,
     },
     revertedLisContainer: {
-      display: "flex",
-      flexDirection: "column-reverse",
-      minHeight: "100%"
+      display: 'flex',
+      flexDirection: 'column-reverse',
+      minHeight: '100%',
     },
     reverted: {
-      display: "flex",
-      flexDirection: "column-reverse",
-      width: "100%"
-    }
+      display: 'flex',
+      flexDirection: 'column-reverse',
+      width: '100%',
+    },
   })
 );
 
 interface Props<Item, ItemProps> {
-  ListItem: ComponentType<ItemProps>;
+  ListItem: React.ComponentType<ItemProps>;
   getItemProps: (item: Item) => ItemProps;
   items?: Item[];
   className?: string;
@@ -37,7 +37,7 @@ function FlatList<Item = any, ItemProps = Item>({
   getItemProps,
   reverted,
   className,
-  onMount
+  onMount,
 }: Props<Item, ItemProps>) {
   const classes = useStyles();
 
@@ -65,8 +65,8 @@ function FlatList<Item = any, ItemProps = Item>({
   }
   return (
     <div className={className} ref={scroller}>
-      <div className={reverted ? classes.revertedLisContainer : ""}>
-        <div className={reverted ? classes.reverted : ""}>
+      <div className={reverted ? classes.revertedLisContainer : ''}>
+        <div className={reverted ? classes.reverted : ''}>
           {items.map((item: any, index: number) => {
             return (
               <ListItem key={item.id} {...getItemProps(item)} index={index} />
@@ -79,8 +79,8 @@ function FlatList<Item = any, ItemProps = Item>({
 }
 
 FlatList.defaultProps = {
-  className: "",
-  getItemProps: (item: any) => item
+  className: '',
+  getItemProps: (item: any) => item,
 };
 
 export default FlatList;

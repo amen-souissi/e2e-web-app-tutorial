@@ -1,42 +1,40 @@
-/// <reference path="../../../../node_modules/@types/jest/index.d.ts"/>
-
-import * as React from "react";
-import { MockedProvider } from "@apollo/react-testing";
-import { wait } from "@testing-library/react";
+import { MockedProvider } from '@apollo/client/testing';
+import { waitFor, screen } from '@testing-library/react';
 
 import ChannelsQuery, {
-  Query as QueryData
-} from "../../../graphql/queries/Channels";
-import AppDrawer from "../../../components/AppDrawer";
-import { customRender } from "../../tests-utils";
+  Query as QueryData,
+} from '../../../graphql/queries/Channels';
+import AppDrawer from '../../../components/AppDrawer';
+import { customRender } from '../../tests-utils';
 
 const channelsData: QueryData = {
-  channels: [{ id: "foo", title: "Foo" }]
+  // @ts-ignore
+  channels: [{ id: '1', title: 'Foo', __typename: 'Channel' }],
 };
 
 const mocks = [
   {
     request: {
-      query: ChannelsQuery
+      query: ChannelsQuery,
     },
     result: {
-      data: channelsData
-    }
-  }
+      data: channelsData,
+    },
+  },
 ];
 
-describe("AppDrawer integration tests", () => {
-  test("Should load then display channels", async () => {
-    const { getByText, queryByTestId } = customRender(
+describe('AppDrawer integration tests', () => {
+  test('Should load then display channels', async () => {
+    customRender(
       <MockedProvider mocks={mocks} addTypename={false}>
         <AppDrawer />
       </MockedProvider>
     );
     // loading started
-    expect(queryByTestId("progress")).toBeDefined();
+    expect(screen.queryByTestId('progress')).toBeDefined();
     // wait for response (Foo is defined)
-    await wait(() => getByText(/Foo/g));
+    await waitFor(() => screen.getByText(/Foo/g));
     // loading ended
-    expect(queryByTestId("progress")).toBeNull();
+    expect(screen.queryByTestId('progress')).toBeNull();
   });
 });

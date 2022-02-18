@@ -1,11 +1,11 @@
-import http from "http";
-import express, { Request } from "express";
-import { ApolloServer } from "apollo-server-express";
-import { buildSchema } from "type-graphql";
-import "reflect-metadata";
+import http from 'http';
+import express, { Request } from 'express';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema } from 'type-graphql';
+import 'reflect-metadata';
 
-import ChannelResolver from "./graphql/resolvers/channel";
-import IDatabaseClient, { pgDatabaseClient } from "./data-sources";
+import ChannelResolver from './graphql/resolvers/channel';
+import IDatabaseClient, { pgDatabaseClient } from './data-sources';
 
 export interface AppContext {
   request: Request;
@@ -27,18 +27,19 @@ const app = express();
 
 async function bootstrap() {
   const schema = await buildSchema({
-    resolvers: [ChannelResolver]
+    resolvers: [ChannelResolver],
     // authChecker: authChecker
   });
+
   const server = new ApolloServer({
     schema,
     context: async ({ req }): Promise<AppContext> => {
       // pass request, databaseClient and user into the context for each resolver
       return {
         request: req,
-        databaseClient: pgDatabaseClient
+        databaseClient: pgDatabaseClient,
       };
-    }
+    },
     // dataSources for the REST APIs
   });
 
@@ -50,7 +51,9 @@ async function bootstrap() {
   server.installSubscriptionHandlers(httpServer);
 
   httpServer.listen(4000, () => {
-    console.log(`🚀  Server ready at http://localhost:4000${server.graphqlPath}`);
+    console.log(
+      `🚀  Server ready at http://localhost:4000${server.graphqlPath}`
+    );
   });
 }
 

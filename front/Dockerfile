@@ -1,4 +1,4 @@
-FROM node:10.16.0
+FROM node:14.17.0
 LABEL maintainer="Amen SOUISSI <amen.souissi@decathlon.com>"
 
 COPY . /root/project

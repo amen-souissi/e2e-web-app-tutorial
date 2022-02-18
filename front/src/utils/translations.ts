@@ -5,16 +5,16 @@ interface ITranslations {
 const Translations: ITranslations = {
   fr: {
     channels: {
-      channels: "Chaînes",
-      comment: "Notez quelque chose"
-    }
+      channels: 'Chaînes',
+      comment: 'Notez quelque chose',
+    },
   },
   en: {
     channels: {
-      channels: "Channels",
-      comment: "Send a message"
-    }
-  }
+      channels: 'Channels',
+      comment: 'Send a message',
+    },
+  },
 };
 
 export default Translations;

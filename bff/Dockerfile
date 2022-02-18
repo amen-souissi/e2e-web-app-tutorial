@@ -1,5 +1,5 @@
 FROM node:10.16.0
-LABEL maintainer="Amen SOUISSI <amen.souissi@decathlon.com>"
+LABEL maintainer="Amen SOUISSI <amen.souissi@pricemoov.com>"
 
 COPY . /root/project
 

@@ -1,49 +1,27 @@
-import { ApolloClient } from "apollo-client";
-import { toIdValue, getMainDefinition } from "apollo-utilities";
-import { ApolloLink, concat, split } from "apollo-link";
-import { createHttpLink } from "apollo-link-http";
-import { WebSocketLink } from "apollo-link-ws";
 import {
+  ApolloClient,
+  ApolloLink,
+  concat,
+  createHttpLink,
+  split,
   InMemoryCache,
-  IdGetterObj,
-  IntrospectionFragmentMatcher
-} from "apollo-cache-inmemory";
+} from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData: {
-    __schema: {
-      types: []
-    }
-  }
-});
-
-const dataIdFromObject = (getterObj: IdGetterObj): string => {
-  return `${getterObj.id || ""}-${getterObj.__typename}`;
-};
-
-const cache = new InMemoryCache({
-  dataIdFromObject,
-  fragmentMatcher,
-  cacheRedirects: {
-    Query: {
-      node: (_, args) => {
-        return toIdValue(dataIdFromObject({ id: args.id }));
-      }
-    }
-  }
-});
+const cache = new InMemoryCache();
 
 export default function getApolloClient() {
   // use the gql bff url
   const httpLink = createHttpLink({
-    uri: `${process.env.REACT_APP_BFF_URL}/graphql`
+    uri: `${process.env.REACT_APP_BFF_URL}/graphql`,
   });
 
   const wsLink = new WebSocketLink({
     uri: `${process.env.REACT_APP_WS_BFF_URL}/graphql`,
     options: {
-      reconnect: true
-    }
+      reconnect: true,
+    },
   });
 
   const link = split(
@@ -51,8 +29,8 @@ export default function getApolloClient() {
     ({ query }) => {
       const definition = getMainDefinition(query);
       return (
-        definition.kind === "OperationDefinition" &&
-        definition.operation === "subscription"
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
       );
     },
     wsLink,
@@ -67,8 +45,8 @@ export default function getApolloClient() {
         headers: {
           ...headers,
           Authorization: null, // ex: store.getState().user.token
-          "X-Api-Key": null // ex: process.env.API_KEY
-        }
+          'X-Api-Key': null, // ex: process.env.API_KEY
+        },
       };
     });
     return forward ? forward(operation) : null;
@@ -76,6 +54,6 @@ export default function getApolloClient() {
 
   return new ApolloClient({
     link: concat(authMiddleware, link),
-    cache: cache
+    cache: cache,
   });
 }

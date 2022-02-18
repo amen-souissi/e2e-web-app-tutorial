@@ -1,6 +1,14 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
-import Main from "./components/pages/Main";
+import AppLayout from './components/pages/AppLayout';
+import App from './components/pages/App';
+import Home from './components/pages/Home';
 
-export default <Route path="/" component={Main} />;
+export default (
+  <Routes>
+    <Route path="/" element={<AppLayout />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/messages/:channelId" element={<App />} />
+    </Route>
+  </Routes>
+);

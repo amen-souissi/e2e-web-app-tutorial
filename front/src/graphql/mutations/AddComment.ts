@@ -1,6 +1,6 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-import Comment, { CommentFragment } from "../fragments/Comment";
+import Comment, { CommentFragment } from '../fragments/Comment';
 
 export interface Mutation {
   addComment: CommentFragment;
